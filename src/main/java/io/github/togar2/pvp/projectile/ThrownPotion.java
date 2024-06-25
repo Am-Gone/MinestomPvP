@@ -8,9 +8,7 @@ import io.github.togar2.pvp.utils.EffectManager;
 import net.minestom.server.collision.BoundingBox;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.effects.Effects;
-import net.minestom.server.entity.Entity;
-import net.minestom.server.entity.EntityType;
-import net.minestom.server.entity.LivingEntity;
+import net.minestom.server.entity.*;
 import net.minestom.server.entity.metadata.item.ThrownPotionMeta;
 import net.minestom.server.item.ItemComponent;
 import net.minestom.server.item.ItemStack;
@@ -72,7 +70,8 @@ public class ThrownPotion extends CustomEntityProjectile implements ItemHoldingP
 		BoundingBox boundingBox = getBoundingBox().expand(8.0, 4.0, 8.0);
 		List<LivingEntity> entities = Objects.requireNonNull(getInstance()).getEntities().stream()
 				.filter(entity -> boundingBox.intersectEntity(getPosition().add(0, -2, 0), entity))
-				.filter(entity -> entity instanceof LivingEntity)
+				.filter(entity -> entity instanceof LivingEntity
+						&& !(entity instanceof Player player && player.getGameMode() == GameMode.SPECTATOR))
 				.map(entity -> (LivingEntity) entity).collect(Collectors.toList());
 		
 		if (hitEntity instanceof LivingEntity && !entities.contains(hitEntity))
