@@ -1,3 +1,10 @@
+# IMPORTANT NOTICE
+
+This 1.21 fork is **temporary** and **unofficial**. It is meant to be used until the [official version](https://github.com/TogAr2/MinestomPvP/tree/rewrite) is updated to 1.21.
+I only updated the fork to use the new internals of Minestom 1.21, and did not test it extensively.
+
+Things **might** break. If you encounter any issues, please open an issue on this repository.
+
 # MinestomPvP
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
