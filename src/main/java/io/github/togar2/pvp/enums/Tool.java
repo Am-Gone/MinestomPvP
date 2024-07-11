@@ -81,12 +81,6 @@ public enum Tool {
 	
 	public static Map<Attribute, List<AttributeModifier>> getAttributes(@Nullable Tool tool, EquipmentSlot slot, ItemStack item, boolean legacy) {
 		Map<Attribute, List<AttributeModifier>> modifiers = new HashMap<>();
-		for (AttributeList.Modifier itemModifier : item.get(ItemComponent.ATTRIBUTE_MODIFIERS).modifiers()) {
-			if (itemModifier.slot().contains(slot)) {
-				modifiers.computeIfAbsent(itemModifier.attribute(), k -> new ArrayList<>())
-						.add(itemModifier.modifier());
-			}
-		}
 		
 		// Only add tool attributes if the material is a tool
 		if (tool != null) {
@@ -103,11 +97,6 @@ public enum Tool {
 	
 	public static Map<Attribute, List<NamespaceID>> getAttributeIds(@Nullable Tool tool, EquipmentSlot slot, ItemStack item) {
 		Map<Attribute, List<NamespaceID>> modifiers = new HashMap<>();
-		for (AttributeList.Modifier itemModifier : item.get(ItemComponent.ATTRIBUTE_MODIFIERS).modifiers()) {
-			if (itemModifier.slot().contains(slot)) {
-				modifiers.computeIfAbsent(itemModifier.attribute(), k -> new ArrayList<>()).add(itemModifier.modifier().id());
-			}
-		}
 		
 		if (tool != null) {
 			if (slot == EquipmentSlot.MAIN_HAND) {

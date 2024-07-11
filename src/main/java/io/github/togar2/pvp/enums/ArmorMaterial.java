@@ -67,13 +67,7 @@ public enum ArmorMaterial {
 	
 	public static Map<Attribute, List<AttributeModifier>> getAttributes(@Nullable ArmorMaterial material, EquipmentSlot slot, ItemStack item, boolean legacy) {
 		Map<Attribute, List<AttributeModifier>> modifiers = new HashMap<>();
-		for (AttributeList.Modifier itemModifier : item.get(ItemComponent.ATTRIBUTE_MODIFIERS).modifiers()) {
-			if (itemModifier.slot().contains(slot)) {
-				modifiers.computeIfAbsent(itemModifier.attribute(), k -> new ArrayList<>())
-						.add(itemModifier.modifier());
-			}
-		}
-		
+
 		// Only add armor attributes if the material is armor
 		if (material != null) {
 			if (slot == getRequiredSlot(item.material())) {
@@ -85,18 +79,13 @@ public enum ArmorMaterial {
 				}
 			}
 		}
-		
+
 		return modifiers;
 	}
 	
 	public static Map<Attribute, List<NamespaceID>> getAttributeIds(@Nullable ArmorMaterial material, EquipmentSlot slot, ItemStack item) {
 		Map<Attribute, List<NamespaceID>> modifiers = new HashMap<>();
-		for (AttributeList.Modifier itemModifier : item.get(ItemComponent.ATTRIBUTE_MODIFIERS).modifiers()) {
-			if (itemModifier.slot().contains(slot)) {
-				modifiers.computeIfAbsent(itemModifier.attribute(), k -> new ArrayList<>()).add(itemModifier.modifier().id());
-			}
-		}
-		
+
 		if (material != null) {
 			if (slot == getRequiredSlot(item.material())) {
 				NamespaceID modifierId = getModifierId(slot);
